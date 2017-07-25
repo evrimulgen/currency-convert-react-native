@@ -1,17 +1,7 @@
-import React, { Component } from 'react';
-import {
-    Text,
-    View
-} from 'react-native';
+import React  from 'react';
 
-export default class App  extends Component {
-    render() {
-        return(
-            <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
-                <Text>
-                    Shit just got real
-                </Text>
-            </View>
-        )
-    }
-}
+import Home from './screens/Home';
+
+export default App = () => <Home/>
+
+
