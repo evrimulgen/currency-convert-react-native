@@ -10,11 +10,15 @@ import Container from '../components/Container';
 import Logo from '../components/Logo';
 import { InputWithButton } from '../components/Input';
 import { ButtonSwitch } from '../components/Buttons'
+import { SmallText } from '../components/Text';
 
 const TEMP_MAIN_CURRENCY    = 'USD';
 const TEMP_QUOTE_CURRENCY   = 'GBP';
 const TEMP_MAIN_VALUE       = '100';
 const TEMP_QUOTE_VALUE      = '76.9';
+const TEMP_CONVERSION_RATE  = 76.879;
+const TEMP_CONVERSION_DATE  = new Date();
+
 
 EStyleSheet.build({
     $primary: '#4F6D7F',
@@ -59,6 +63,12 @@ export default class Home extends Component {
                     editable={false}
                     onPress={() => this.onQuotePress()}
                     value={TEMP_QUOTE_VALUE}
+                />
+                <SmallText
+                    main={TEMP_MAIN_CURRENCY}
+                    quote={TEMP_QUOTE_CURRENCY}
+                    date={TEMP_CONVERSION_DATE}
+                    conversionValue={TEMP_CONVERSION_RATE}
                 />
                 <ButtonSwitch
                     onPress={() => this.onReverse()}
