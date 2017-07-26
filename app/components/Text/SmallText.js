@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import styles from './styles';
 

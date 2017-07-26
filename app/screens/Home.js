@@ -11,6 +11,7 @@ import Logo from '../components/Logo';
 import { InputWithButton } from '../components/Input';
 import { ButtonSwitch } from '../components/Buttons'
 import { SmallText } from '../components/Text';
+import { Header } from '../components/Header';
 
 const TEMP_MAIN_CURRENCY    = 'USD';
 const TEMP_QUOTE_CURRENCY   = 'GBP';
@@ -49,6 +50,7 @@ export default class Home extends Component {
         return(
             <Container>
                 <StatusBar translucent={false} barStyle='light-content' />
+                <Header />
                 <Logo />
                 <InputWithButton
                     buttonText={TEMP_MAIN_CURRENCY}
