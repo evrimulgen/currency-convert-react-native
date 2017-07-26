@@ -9,6 +9,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Container from '../components/Container';
 import Logo from '../components/Logo';
 import { InputWithButton } from '../components/Input';
+import { ButtonSwitch } from '../components/Buttons'
 
 const TEMP_MAIN_CURRENCY    = 'USD';
 const TEMP_QUOTE_CURRENCY   = 'GBP';
@@ -36,6 +37,10 @@ export default class Home extends Component {
 
     }
 
+    onReverse() {
+
+    }
+
     render() {
         return(
             <Container>
@@ -55,7 +60,9 @@ export default class Home extends Component {
                     onPress={() => this.onQuotePress()}
                     value={TEMP_QUOTE_VALUE}
                 />
-                <View />
+                <ButtonSwitch
+                    onPress={() => this.onReverse()}
+                    text='Reverse Currencies'  />
             </Container>
         )
     }
