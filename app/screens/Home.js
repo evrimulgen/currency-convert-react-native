@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View,
-    StatusBar
+    StatusBar,
+    KeyboardAvoidingView,
 } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -26,7 +26,7 @@ EStyleSheet.build({
     $white: '#fff',
     $border: '#E2E2E2',
     $textMain: '#797979',
-    $lightGrey: '#F0F0F0'
+    $lightGrey: '#F0F0F0',
 });
 
 export default class Home extends Component {
@@ -46,35 +46,43 @@ export default class Home extends Component {
 
     }
 
+    onOptions() {
+
+    }
+
     render() {
         return(
             <Container>
                 <StatusBar translucent={false} barStyle='light-content' />
-                <Header />
-                <Logo />
-                <InputWithButton
-                    buttonText={TEMP_MAIN_CURRENCY}
-                    editable={true}
-                    onPress={() => this.onMainPress()}
-                    defaultValue={TEMP_MAIN_VALUE}
-                    keyboardType='numeric'
-                    onChangeText={(text) => this.onType(text)}
+                <Header
+                    onPress={() => this.onOptions()}
                 />
-                <InputWithButton
-                    buttonText={TEMP_QUOTE_CURRENCY}
-                    editable={false}
-                    onPress={() => this.onQuotePress()}
-                    value={TEMP_QUOTE_VALUE}
-                />
-                <SmallText
-                    main={TEMP_MAIN_CURRENCY}
-                    quote={TEMP_QUOTE_CURRENCY}
-                    date={TEMP_CONVERSION_DATE}
-                    conversionValue={TEMP_CONVERSION_RATE}
-                />
-                <ButtonSwitch
-                    onPress={() => this.onReverse()}
-                    text='Reverse Currencies'  />
+                <KeyboardAvoidingView behavior='padding' style={{alignItems: 'center'}}>
+                    <Logo />
+                    <InputWithButton
+                        buttonText={TEMP_MAIN_CURRENCY}
+                        editable={true}
+                        onPress={() => this.onMainPress()}
+                        defaultValue={TEMP_MAIN_VALUE}
+                        keyboardType='numeric'
+                        onChangeText={(text) => this.onType(text)}
+                    />
+                    <InputWithButton
+                        buttonText={TEMP_QUOTE_CURRENCY}
+                        editable={false}
+                        onPress={() => this.onQuotePress()}
+                        value={TEMP_QUOTE_VALUE}
+                    />
+                    <SmallText
+                        main={TEMP_MAIN_CURRENCY}
+                        quote={TEMP_QUOTE_CURRENCY}
+                        date={TEMP_CONVERSION_DATE}
+                        conversionValue={TEMP_CONVERSION_RATE}
+                    />
+                    <ButtonSwitch
+                        onPress={() => this.onReverse()}
+                        text='Reverse Currencies'  />
+                </KeyboardAvoidingView>
             </Container>
         )
     }
