@@ -27,6 +27,7 @@ EStyleSheet.build({
     $border: '#E2E2E2',
     $textMain: '#797979',
     $lightGrey: '#F0F0F0',
+    $darkText: '#343434'
 });
 
 export default class Home extends Component {

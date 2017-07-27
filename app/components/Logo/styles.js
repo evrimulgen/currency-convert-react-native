@@ -1,9 +1,9 @@
 import { Dimensions } from 'react-native';
-import EStyleSheets from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const imageWidth = Dimensions.get('window').width / 2;
 
-export default EStyleSheets.create({
+export default EStyleSheet.create({
     $largeContainerWidth: imageWidth,
     $largeImageWidth: imageWidth / 2,
     $smallContainerWidth: imageWidth / 2,

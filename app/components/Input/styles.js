@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import EStyleSheets from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const BORDER_RADIUS = 5;
 const INPUT_HEIGHT = 48;
 
-export default EStyleSheets.create({
+export default EStyleSheet.create({
     $buttonColor: '$white',
     $buttonModifier: 0.1,
 
