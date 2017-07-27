@@ -1,7 +1,8 @@
 import React  from 'react';
 
-import Home from './screens/Home';
+// import Home from './screens/Home';
+import CurrencyList from './screens/CurrencyList';
 
-export default App = () => <Home/>
+export default App = () => <CurrencyList/>
 
 
