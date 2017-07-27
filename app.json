@@ -1,4 +1,9 @@
 {
   "name": "currencyConverter",
-  "displayName": "currencyConverter"
+  "displayName": "currencyConverter",
+  "expo": {
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    }
+  }
 }

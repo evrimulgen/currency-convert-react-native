@@ -4,8 +4,6 @@ import {
     KeyboardAvoidingView,
 } from 'react-native';
 
-import EStyleSheet from 'react-native-extended-stylesheet';
-
 import Container from '../components/Container';
 import Logo from '../components/Logo';
 import { InputWithButton } from '../components/Input';
@@ -19,16 +17,6 @@ const TEMP_MAIN_VALUE       = '100';
 const TEMP_QUOTE_VALUE      = '76.9';
 const TEMP_CONVERSION_RATE  = 76.879;
 const TEMP_CONVERSION_DATE  = new Date();
-
-
-EStyleSheet.build({
-    $primary: '#4F6D7F',
-    $white: '#fff',
-    $border: '#E2E2E2',
-    $textMain: '#797979',
-    $lightGrey: '#F0F0F0',
-    $darkText: '#343434'
-});
 
 export default class Home extends Component {
     onQuotePress() {
