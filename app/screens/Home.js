@@ -4,6 +4,9 @@ import {
     KeyboardAvoidingView,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { currencySwap, currencyValueChange } from '../actions/currencies';
 
 import Container from '../components/Container';
 import Logo from '../components/Logo';
@@ -19,9 +22,10 @@ const TEMP_QUOTE_VALUE      = '76.9';
 const TEMP_CONVERSION_RATE  = 76.879;
 const TEMP_CONVERSION_DATE  = new Date();
 
-export default class Home extends Component {
+class Home extends Component {
     static propTypes = {
-        navigation: PropTypes.object
+        navigation: PropTypes.object,
+        dispatch: PropTypes.func
     };
 
     onMainPress() {
@@ -32,12 +36,12 @@ export default class Home extends Component {
         this.props.navigation.navigate('CurrencyList', {title: 'Quote Currency'})
     }
 
-    onType(text) {
-
+    onType(value) {
+        this.props.dispatch(currencyValueChange(value));
     }
 
     onReverse() {
-
+       this.props.dispatch(currencySwap());
     }
 
     onOptions() {
@@ -81,3 +85,5 @@ export default class Home extends Component {
         )
     }
 };
+
+export default connect()(Home);
