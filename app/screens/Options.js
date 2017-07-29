@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StatusBar } from 'react-native';
+import { ScrollView, StatusBar, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { ListItem, Separator } from '../components/List';
@@ -17,7 +17,7 @@ export default class Options extends Component {
     }
 
     onLinkPress() {
-
+        Linking.openURL('http://fixer.io').catch(() => alert('You have an error'))
     }
 
     render() {
