@@ -41,7 +41,7 @@ export default class Home extends Component {
     }
 
     onOptions() {
-
+        this.props.navigation.navigate('Options')
     }
 
     render() {
