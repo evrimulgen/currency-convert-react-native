@@ -1,4 +1,9 @@
-import { CURRENCY_SWAP, CURRENCY_VALUE_CHANGE } from '../actions/currencies';
+import {
+    CURRENCY_SWAP,
+    CURRENCY_VALUE_CHANGE,
+    CURRENCY_MAIN_SELECT,
+    CURRENCY_QUOTE_SELECT
+} from '../actions/currencies';
 
 const initialState = {
     baseCurrency: 'USD',
@@ -46,6 +51,23 @@ const initialState = {
     },
 };
 
+const setConversions = (state, action) => {
+    let conversion = {
+        isFetching: true,
+        date: '',
+        rates: {}
+    };
+
+    if (state.conversions[action.currency]) {
+        conversion = state.conversions[action.currency];
+    }
+
+    return {
+        ...state.conversions,
+        [action.currency]: conversion
+    }
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case CURRENCY_SWAP:
@@ -54,11 +76,25 @@ const reducer = (state = initialState, action) => {
                 baseCurrency: state.quoteCurrency,
                 quoteCurrency: state.baseCurrency
             };
-        break;
+            break;
         case CURRENCY_VALUE_CHANGE:
             return {
                 ...state,
                 amount: action.amount
+            };
+            break;
+        case CURRENCY_MAIN_SELECT:
+            return {
+                ...state,
+                baseCurrency: action.currency,
+                conversions:  setConversions(state, action)
+            };
+            break;
+        case CURRENCY_QUOTE_SELECT:
+            return {
+                ...state,
+                quoteCurrency: action.currency,
+                conversions: setConversions(state, action)
             };
             break;
         default:
