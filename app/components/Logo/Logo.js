@@ -7,10 +7,15 @@ import {
     Animated
 } from 'react-native';
 import styles from './styles';
+import PorpTypes from 'prop-types';
 
 const LOGO_ANIMATION_DURATION = 300;
 
 export default class Logo extends Component {
+    static propTypes = {
+        iconColor: PorpTypes.string
+    };
+
     constructor(props) {
         super(props);
 
@@ -66,7 +71,8 @@ export default class Logo extends Component {
 
         const imageStyle = [
             styles.image,
-            { width: this.imageWidth }
+            { width: this.imageWidth },
+            this.props.iconColor ? {tintColor: this.props.iconColor} : null
         ];
 
         return(

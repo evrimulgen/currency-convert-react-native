@@ -24,7 +24,8 @@ class Home extends Component {
         amount: PropTypes.number,
         conversionRate: PropTypes.number,
         isFetching: PropTypes.bool,
-        conversionLastUpdate: PropTypes.object
+        conversionLastUpdate: PropTypes.object,
+        primaryColor: PropTypes.string
     };
 
     onMainPress() {
@@ -61,13 +62,13 @@ class Home extends Component {
         }
 
         return(
-            <Container>
+            <Container backgroundColor={this.props.primaryColor}>
                 <StatusBar translucent={false} barStyle='light-content' />
                 <Header
                     onPress={() => this.onOptions()}
                 />
                 <KeyboardAvoidingView behavior='padding' style={{alignItems: 'center'}}>
-                    <Logo />
+                    <Logo iconColor={this.props.primaryColor} />
                     <InputWithButton
                         buttonText={this.props.baseCurrency}
                         editable={true}
@@ -75,12 +76,14 @@ class Home extends Component {
                         defaultValue={this.props.amount.toString()}
                         keyboardType='numeric'
                         onChangeText={(text) => this.onType(text)}
+                        textColor={this.props.primaryColor}
                     />
                     <InputWithButton
                         buttonText={this.props.quoteCurrency}
                         editable={false}
                         onPress={() => this.onQuotePress()}
                         value={quotePrice}
+                        textColor={this.props.primaryColor}
                     />
                     <SmallText
                         main={this.props.baseCurrency}
@@ -110,7 +113,8 @@ const mapSateToProps = (state) => {
         amount: state.currencies.amount,
         conversionRate: rates[quoteCurrency] || 0,
         isFetching: conversionSelector.isFetching,
-        conversionLastUpdate: conversionSelector.date ? new Date(conversionSelector.date) : new Date()
+        conversionLastUpdate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
+        primaryColor: state.themes.primaryColor
     }
 };
 
