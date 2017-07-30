@@ -15,17 +15,16 @@ import { ButtonSwitch } from '../components/Buttons'
 import { SmallText } from '../components/Text';
 import { Header } from '../components/Header';
 
-const TEMP_MAIN_CURRENCY    = 'USD';
-const TEMP_QUOTE_CURRENCY   = 'GBP';
-const TEMP_MAIN_VALUE       = '100';
-const TEMP_QUOTE_VALUE      = '76.9';
-const TEMP_CONVERSION_RATE  = 76.879;
-const TEMP_CONVERSION_DATE  = new Date();
-
 class Home extends Component {
     static propTypes = {
         navigation: PropTypes.object,
-        dispatch: PropTypes.func
+        dispatch: PropTypes.func,
+        baseCurrency: PropTypes.string,
+        quoteCurrency: PropTypes.string,
+        amount: PropTypes.number,
+        conversionRate: PropTypes.number,
+        isFetching: PropTypes.bool,
+        conversionLastUpdate: PropTypes.object
     };
 
     onMainPress() {
@@ -37,7 +36,8 @@ class Home extends Component {
     }
 
     onType(value) {
-        this.props.dispatch(currencyValueChange(value));
+        value = isNaN(value) ? 1 : value;
+        this.props.dispatch(currencyValueChange(value || 1));
     }
 
     onReverse() {
@@ -49,6 +49,11 @@ class Home extends Component {
     }
 
     render() {
+        let quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
+        if (this.props.isFetching) {
+            quotePrice = '...'
+        }
+
         return(
             <Container>
                 <StatusBar translucent={false} barStyle='light-content' />
@@ -58,24 +63,24 @@ class Home extends Component {
                 <KeyboardAvoidingView behavior='padding' style={{alignItems: 'center'}}>
                     <Logo />
                     <InputWithButton
-                        buttonText={TEMP_MAIN_CURRENCY}
+                        buttonText={this.props.baseCurrency}
                         editable={true}
                         onPress={() => this.onMainPress()}
-                        defaultValue={TEMP_MAIN_VALUE}
+                        defaultValue={this.props.amount.toString()}
                         keyboardType='numeric'
                         onChangeText={(text) => this.onType(text)}
                     />
                     <InputWithButton
-                        buttonText={TEMP_QUOTE_CURRENCY}
+                        buttonText={this.props.quoteCurrency}
                         editable={false}
                         onPress={() => this.onQuotePress()}
-                        value={TEMP_QUOTE_VALUE}
+                        value={quotePrice}
                     />
                     <SmallText
-                        main={TEMP_MAIN_CURRENCY}
-                        quote={TEMP_QUOTE_CURRENCY}
-                        date={TEMP_CONVERSION_DATE}
-                        conversionValue={TEMP_CONVERSION_RATE}
+                        main={this.props.baseCurrency}
+                        quote={this.props.quoteCurrency}
+                        date={this.props.conversionLastUpdate}
+                        conversionValue={this.props.conversionRate}
                     />
                     <ButtonSwitch
                         onPress={() => this.onReverse()}
@@ -84,6 +89,23 @@ class Home extends Component {
             </Container>
         )
     }
+}
+
+const mapSateToProps = (state) => {
+    const baseCurrency = state.currencies.baseCurrency;
+    const quoteCurrency = state.currencies.quoteCurrency;
+
+    const conversionSelector = state.currencies.conversions[baseCurrency] || {};
+    const rates = conversionSelector.rates || {};
+
+    return {
+        baseCurrency,
+        quoteCurrency,
+        amount: state.currencies.amount,
+        conversionRate: rates[quoteCurrency] || 0,
+        isFetching: conversionSelector.isFetching,
+        conversionLastUpdate: conversionSelector.date ? new Date(conversionSelector.date) : new Date()
+    }
 };
 
-export default connect()(Home);
+export default connect(mapSateToProps)(Home);

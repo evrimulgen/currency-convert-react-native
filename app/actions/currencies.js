@@ -7,6 +7,6 @@ export const currencySwap = () => ({
 
 export const currencyValueChange = (amount) => ({
     type: CURRENCY_VALUE_CHANGE,
-    amount
+    amount: parseFloat(amount)
 });
 
