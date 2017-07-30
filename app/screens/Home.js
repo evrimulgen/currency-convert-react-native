@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { currencySwap, currencyValueChange } from '../actions/currencies';
+import { currencySwap, currencyValueChange, initialCurrencyUpdate } from '../actions/currencies';
 
 import Container from '../components/Container';
 import Logo from '../components/Logo';
@@ -27,6 +27,10 @@ class Home extends Component {
         conversionLastUpdate: PropTypes.object,
         primaryColor: PropTypes.string
     };
+
+    componentWillMount() {
+        this.props.dispatch(initialCurrencyUpdate())
+    }
 
     onMainPress() {
         this.props.navigation.navigate('CurrencyList', {
