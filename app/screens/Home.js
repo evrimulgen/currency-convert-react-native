@@ -28,11 +28,17 @@ class Home extends Component {
     };
 
     onMainPress() {
-        this.props.navigation.navigate('CurrencyList', {title: 'Main Currency'})
+        this.props.navigation.navigate('CurrencyList', {
+            title: 'Main Currency',
+            type: 'base'
+        })
     }
 
     onQuotePress() {
-        this.props.navigation.navigate('CurrencyList', {title: 'Quote Currency'})
+        this.props.navigation.navigate('CurrencyList', {
+            title: 'Quote Currency',
+            type: 'quote'
+        })
     }
 
     onType(value) {
