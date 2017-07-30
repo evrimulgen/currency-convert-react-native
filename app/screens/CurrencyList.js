@@ -36,9 +36,7 @@ class CurrencyList extends Component {
         if (this.props.navigation.state.params.type === 'quote') {
             currencyCompare = this.props.quoteCurrency;
         }
-
-        console.log('this is currency', currencyCompare);
-
+        
         return(
             <View style={{flex: 1}}>
                 <StatusBar barStyle='default' translucent={false} />
