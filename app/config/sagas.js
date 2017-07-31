@@ -2,11 +2,12 @@ import { takeEvery, select, call, put } from 'redux-saga/effects';
 import {
     CURRENCY_MAIN_SELECT,
     CURRENCY_SWAP,
-    CURRENCY_INITIAL_UPDATE,
+    CONVERSION_INITIAL_UPDATE,
     CONVERSION_REQ_RESULT,
     CONVERSION_REQ_ERROR
 } from '../actions/currencies';
 
+// by default IOS does not allow 'http' requests ate some shit on that one...
 const getLatestConversionRate = currency => fetch(`https://api.fixer.io/latest?base=${currency}`);
 
 function* updateConversionRates(action) {
@@ -32,7 +33,7 @@ function* updateConversionRates(action) {
 }
 
 export default function* rootSaga() {
-    yield takeEvery(CURRENCY_INITIAL_UPDATE, updateConversionRates);
+    yield takeEvery(CONVERSION_INITIAL_UPDATE, updateConversionRates);
     yield takeEvery(CURRENCY_SWAP, updateConversionRates);
     yield takeEvery(CURRENCY_MAIN_SELECT, updateConversionRates);
 }

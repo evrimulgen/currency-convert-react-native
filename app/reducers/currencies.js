@@ -3,6 +3,7 @@ import {
     CURRENCY_VALUE_CHANGE,
     CURRENCY_MAIN_SELECT,
     CURRENCY_QUOTE_SELECT,
+    CONVERSION_INITIAL_UPDATE,
     CONVERSION_REQ_RESULT,
     CONVERSION_REQ_ERROR
 } from '../actions/currencies';
@@ -12,6 +13,7 @@ const initialState = {
     quoteCurrency: 'GBP',
     amount: 100,
     conversions: {},
+    error: null
 };
 
 const setConversions = (state, action) => {
@@ -60,7 +62,31 @@ const reducer = (state = initialState, action) => {
                 conversions: setConversions(state, action)
             };
             break;
-
+        case CONVERSION_INITIAL_UPDATE:
+            return {
+                ...state,
+                conversions: setConversions(state, { currency: state.baseCurrency })
+            };
+            break;
+        case CONVERSION_REQ_RESULT:
+            return {
+                ...state,
+                baseCurrency: action.result.base,
+                conversions: {
+                    ...state.conversions,
+                    [action.result.base]: {
+                        isFetching: false,
+                        ...action.result
+                    }
+                }
+            };
+            break;
+        case CONVERSION_REQ_ERROR:
+            return {
+                ...state,
+                error: action.error
+            };
+            break;
         default:
             return state
     }
